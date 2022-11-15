@@ -1,0 +1,25 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../MulticycleCPU.srcs/sources_1/ip/idmem_2/sim/idmem.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/alu.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/aludec.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/controller.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/datapath.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/flopenr.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/flopr.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/maindec.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/mips.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/mux2.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/mux3.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/mux4.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/regfile.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/signext.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/sl2.v" \
+"../../../../MulticycleCPU.srcs/sources_1/new/top.v" \
+"../../../../MulticycleCPU.srcs/sim_1/new/testbench.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

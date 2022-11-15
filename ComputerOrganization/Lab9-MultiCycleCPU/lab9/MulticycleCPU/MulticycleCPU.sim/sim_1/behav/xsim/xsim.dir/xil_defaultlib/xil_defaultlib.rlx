@@ -1,0 +1,24 @@
+0.6
+2017.4
+Dec 15 2017
+21:07:18
+F:/jizu/MulticycleCPU/MulticycleCPU.sim/sim_1/behav/xsim/glbl.v,1513215259,verilog,,,,glbl,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sim_1/new/testbench.v,1608376547,verilog,,,,testbench,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/ip/data_mem/sim/data_mem.v,1608366964,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/ip/inst_mem/sim/inst_mem.v,,data_mem,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/ip/idmem_2/sim/idmem.v,1608372233,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/alu.v,,idmem,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/ip/inst_mem/sim/inst_mem.v,1608366909,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/alu.v,,inst_mem,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/alu.v,1608343220,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/aludec.v,,alu,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/aludec.v,1608343226,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/controller.v,,aludec,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/controller.v,1608428564,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/datapath.v,,controller,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/datapath.v,1608430297,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/flopenr.v,,datapath,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/flopenr.v,1608279654,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/flopr.v,,flopenr,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/flopr.v,1608279671,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/maindec.v,,flopr,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/maindec.v,1608428961,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/mips.v,,maindec,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/mips.v,1608381965,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/mux2.v,,mips,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/mux2.v,1607069828,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/mux3.v,,mux2,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/mux3.v,1608346892,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/mux4.v,,mux3,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/mux4.v,1608280024,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/regfile.v,,mux4,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/regfile.v,1607050548,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/signext.v,,regfile,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/signext.v,1607049973,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/sl2.v,,signext,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/sl2.v,1607050055,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/top.v,,sl2,,,,,,,,
+F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sources_1/new/top.v,1608374971,verilog,,F:/jizu/MulticycleCPU/MulticycleCPU.srcs/sim_1/new/testbench.v,,top,,,,,,,,

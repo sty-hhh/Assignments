@@ -1,0 +1,21 @@
+0.6
+2017.4
+Dec 15 2017
+21:07:18
+F:/jizu/singleCPU/singleCPU.sim/sim_1/behav/xsim/glbl.v,1513215259,verilog,,,,glbl,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sim_1/new/testbench.v,1607050253,verilog,,,,testbench,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/ip/data_mem/sim/data_mem.v,1607074386,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/ip/inst_mem/sim/inst_mem.v,,data_mem,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/ip/inst_mem/sim/inst_mem.v,1607051028,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/adder.v,,inst_mem,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/adder.v,1607049080,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/alu.v,,adder,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/alu.v,1607049222,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/aludec.v,,alu,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/aludec.v,1607050604,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/controller.v,,aludec,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/controller.v,1607049306,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/datapath.v,,controller,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/datapath.v,1607088409,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/flopr.v,,datapath,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/flopr.v,1607049476,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/maindec.v,,flopr,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/maindec.v,1607043070,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/mips.v,,maindec,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/mips.v,1607049619,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/mux2.v,,mips,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/mux2.v,1607069828,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/regfile.v,,mux2,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/regfile.v,1607050548,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/signext.v,,regfile,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/signext.v,1607049973,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/sl2.v,,signext,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/sl2.v,1607050055,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/top.v,,sl2,,,,,,,,
+F:/jizu/singleCPU/singleCPU.srcs/sources_1/new/top.v,1607075957,verilog,,F:/jizu/singleCPU/singleCPU.srcs/sim_1/new/testbench.v,,top,,,,,,,,
