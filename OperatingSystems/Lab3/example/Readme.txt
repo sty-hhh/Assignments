@@ -1,0 +1,3 @@
+showstr.asm和upper.c是老师的样板程序
+showstr.com是混合编译生成的可执行程序
+upper.asm是upper.c通过tcc生成的汇编代码，可以查看变量定义的位置
