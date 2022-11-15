@@ -1,0 +1,76 @@
+Router#show run
+Building configuration...
+
+Current configuration : 793 bytes
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 202.16.1.6 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ ip address 66.1.2.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router bgp 300
+ bgp log-neighbor-changes
+ no synchronization
+ neighbor 202.16.1.5 remote-as 200
+ network 66.1.2.0 mask 255.255.255.0
+ network 202.16.2.0
+!
+router rip
+ version 2
+ network 66.0.0.0
+ network 202.16.1.0
+ default-information originate
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 Null0 
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
