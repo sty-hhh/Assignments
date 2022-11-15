@@ -1,2 +1,2 @@
 # SYSU
- My Undergraduate Studies
+This is the repository of sty-hhh's assignments of some Computer Science courses in SYSU.
