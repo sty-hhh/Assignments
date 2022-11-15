@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .w {
+            width: 100%;
+            margin: auto;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .header {
+            height: 43px;
+            margin: 30px auto;
+            background-color: #333;
+            margin-top: 0px;
+        }
+
+        .logo {
+            float: left;
+            width: 198px;
+            height: 43px;
+            margin-left: 30px;
+        }
+
+        .nav2 {
+            float: left;
+            margin-left: 350px;
+        }
+
+        .nav2 ul li {
+            float: left;
+            margin: 0 15px;
+        }
+
+        .nav2 ul li a {
+            display: block;
+            height: 43px;
+            padding: 0 10px;
+            line-height: 43px;
+            color: white;
+        }
+
+        .nav2 ul li a:hover {
+            border-bottom: 2px solid #00a4ff;
+        }
+
+        a.active {
+            background-color: #00a4ff;
+        }
+
+        .user {
+            float: right;
+            margin-right: 50px;
+            color: white;
+        }
+        #users {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        #users td,
+        #users th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #users tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        #users th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #f2f2f2;
+            color:black;
+        }
+    </style>
+</head>
+
+<body>
+    {% for message in get_flashed_messages() %}
+    <div class="alert">{{ message }}</div>
+    {% endfor %}
+    <div class="header w">
+        <!-- 标志模块 -->
+        <div class="logo">
+            <div style="font-size:25px;color: aliceblue; margin-top: 6px;">The Young</div>
+        </div>
+        <!-- 文字导航栏模块 -->
+        <div class="nav2">
+            <ul>
+                <li>
+                    <a href="{{ url_for('index') }}">音乐</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('SingerPage') }}">歌手</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('AlbumPage') }}">专辑</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('UserPage') }}" class="active">用户</a>
+                </li>
+            </ul>
+        </div>
+        <!-- 用户模块 -->
+        <div class="user">
+            <img src="https://img-blog.csdnimg.cn/8242726cba69411f84dc9a750542b1e5.png"
+                style="vertical-align: middle; height: 43px;">
+                {{cur_user}}
+            <a href="{{url_for('login')}}" style="color: white;">退出</a>
+        </div>
+        <div style="float:right;margin-right: 70px; margin-top: 5px;">
+            <form class="form-inline" method="post"  action="{{ url_for('searchkeyword')}}">
+                    <input type="text" class="form-control" name="keyword" placeholder="请输入关键字">
+                    <input type="submit" class="btn btn-primary" name="search" value="搜索">
+            </form>
+        </div>
+    </div>
+    <center>
+    <table id="users">
+        <thead>
+            <tr align="right">
+                <h3>用户</h3>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>喜好</th>
+            <th>操作</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.user_name }}</td>
+            <td>{{ user.user_gender }}</td>
+            <td>{{ user.type }}</td>
+            <td>
+                <div style="display: inline-block;">
+                    <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal{{user.user_id}}"><i
+                            class="glyphicon glyphicon-pencil"></i></button>
+                </div>
+                <div style="display: inline-block;">
+                    <button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal{{user.user_id}}"><i
+                            class="glyphicon glyphicon-trash"></i></button>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {%for user in users%}
+    <div class="modal fade" id="deleteModal{{user.user_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">注销用户</h4>
+                </div>
+                <div class="modal-body">
+                    <center>
+                        <!-- 这里是要提交的表单，提交到那呢？要用action来指定请求的接口，method指定请求的类型：get、post -->
+                        <form action="{{ url_for('deleteuser',user_id=user.user_id) }}" method="POST"
+                            class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label style="margin-left: 10px;">密码:</label>
+                                <input style="margin-left: 10px;" type="text" name="password"
+                                    class="form-constrol" autocomplete="off">
+                            </div>
+                            <!-- 1. form的提交需要用submit。也就是Send message的button的type，设置为submit，否则无法提交，点击按钮没反应-->
+                            <!-- 2. 本来提交btn在form外面，这个需要提到form内才能提交form的信息-->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">关闭</button>
+                                <button type="submit" class="btn btn-primary">删除</button>
+                            </div>
+                        </form>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+    {%for user in users%}
+    <div class="modal fade" id="editModal{{user.user_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <center>
+                        <!-- 这里是要提交的表单，提交到那呢？要用action来指定请求的接口，method指定请求的类型：get、post -->
+                        <form action="{{ url_for('EditUser',user_id=user.user_id) }}" method="POST"
+                            class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label style="margin-left: 10px;">原密码:</label>
+                                <input style="margin-left: 10px;" type="text" name="oldpassword"
+                                    class="form-constrol" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label style="margin-left: 10px;">新密码:</label>
+                                <input style="margin-left: 10px;" type="text" name="password"
+                                    class="form-constrol" autocomplete="off">
+                            </div>
+                            <!-- 1. form的提交需要用submit。也就是Send message的button的type，设置为submit，否则无法提交，点击按钮没反应-->
+                            <!-- 2. 本来提交btn在form外面，这个需要提到form内才能提交form的信息-->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">关闭</button>
+                                <button type="submit" class="btn btn-primary">修改</button>
+                            </div>
+                        </form>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</body>
+
+</html>
