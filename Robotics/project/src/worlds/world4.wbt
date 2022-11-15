@@ -1,0 +1,411 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation 0 1 0 0
+  position 6.176886881336796e-05 -2.3119401625994383e-07 34.13271940392136
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  rotation 1 0 0 1.5708
+  floorSize 10 10
+  floorTileSize 1 1
+}
+DEF car4 Robot {
+  translation 4.499986478597631 4.500000608624762 0.03822037486033646
+  rotation 0.5772885577280422 0.5773019263361808 0.5774603076963921 2.094239894948106
+  children [
+    InertialUnit {
+      rotation -0.5772162380336358 0.5772162380336358 0.5776182381994135 2.09399
+    }
+    Lidar {
+      translation 0 0.14 0
+      rotation 0 1 0 1.5701
+      horizontalResolution 1024
+      fieldOfView 6.28
+      verticalFieldOfView 0.05
+      numberOfLayers 1
+      near 0.001
+      minRange 0.05
+      maxRange 7
+    }
+    Display {
+      width 100
+      height 100
+    }
+    GPS {
+    }
+    DEF fld HingeJoint {
+      jointParameters HingeJointParameters {
+        position -5.994706863477875e-10
+        axis 0 1 0
+        anchor -0.04 0 -0.04
+      }
+      device [
+        RotationalMotor {
+          name "fld"
+        }
+      ]
+      endPoint Solid {
+        translation -7.193647760805888e-11 0 7.193647760805888e-11
+        children [
+          DEF fle Transform {
+            translation -0.04 0 -0.04
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  transparency 0.5
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.01
+                }
+              }
+            ]
+          }
+          DEF fl HingeJoint {
+            jointParameters HingeJointParameters {
+              position -7.388873200119114e-09
+              axis -1 0 0
+              anchor -0.04 -0.02 -0.04
+            }
+            device [
+              RotationalMotor {
+                name "fl"
+                consumptionFactor -0.001
+                maxVelocity 100
+              }
+            ]
+            endPoint DEF WHEEL1 Solid {
+              translation -0.04 -0.02 -0.04
+              rotation -0.674062888973543 0.6735936842634522 0.3031678911577375 2.5524847194151343
+              children [
+                DEF WHEEL Shape {
+                  appearance PBRAppearance {
+                    baseColor 1 1 0
+                  }
+                  geometry Cylinder {
+                    height 0.02
+                    radius 0.02
+                  }
+                }
+              ]
+              name "solid(3)"
+              contactMaterial "ExteriorWheelMat"
+              boundingObject USE WHEEL
+              physics DEF WHEEL_PH Physics {
+                density -1
+                mass 1
+              }
+            }
+          }
+        ]
+        name "solid(3)"
+        boundingObject USE fle
+        physics Physics {
+        }
+      }
+    }
+    DEF frd HingeJoint {
+      jointParameters HingeJointParameters {
+        position -6.431963464051263e-10
+        axis 0 1 0
+        anchor 0.04 0 -0.04
+      }
+      device [
+        RotationalMotor {
+          name "frd"
+        }
+      ]
+      endPoint Solid {
+        translation -2.572785040566572e-11 0 -2.572785040566572e-11
+        children [
+          DEF fre Transform {
+            translation 0.04 0 -0.04
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  transparency 0.5
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.01
+                }
+              }
+            ]
+          }
+          DEF fr HingeJoint {
+            jointParameters HingeJointParameters {
+              position -2.107692240060047e-09
+              axis -1 0 0
+              anchor 0.04 -0.02 -0.04
+            }
+            device [
+              RotationalMotor {
+                name "fr"
+                consumptionFactor -0.001
+                maxVelocity 100
+              }
+            ]
+            endPoint DEF WHEEL1 Solid {
+              translation 0.04 -0.02 -0.04
+              rotation 0.6788109712878665 -0.678338461511406 0.28119850087360376 2.5929901774718407
+              children [
+                DEF WHEEL Shape {
+                  appearance PBRAppearance {
+                    baseColor 1 1 0
+                  }
+                  geometry Cylinder {
+                    height 0.02
+                    radius 0.02
+                  }
+                }
+              ]
+              name "solid(2)"
+              contactMaterial "InteriorWheelMat"
+              boundingObject USE WHEEL
+              physics DEF WHEEL_PH Physics {
+                density -1
+                mass 1
+              }
+            }
+          }
+        ]
+        name "solid(4)"
+        boundingObject DEF fre Transform {
+          translation 0.04 0 -0.04
+          children [
+            Shape {
+              appearance PBRAppearance {
+                transparency 0.5
+              }
+              geometry Cylinder {
+                height 0.01
+                radius 0.01
+              }
+            }
+          ]
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF hr HingeJoint {
+      jointParameters HingeJointParameters {
+        position -5.6098394149063624e-09
+        axis -1 0 0
+        anchor 0.04 -0.02 0.04
+      }
+      device [
+        RotationalMotor {
+          name "hr"
+          consumptionFactor -0.001
+          maxVelocity 100
+        }
+      ]
+      endPoint DEF WHEEL1 Solid {
+        translation 0.04 -0.02 0.04
+        rotation 2.7326269551602543e-09 -2.7326368656503217e-09 0.9999999999999999 1.570799999995009
+        children [
+          DEF WHEEL Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.02
+            }
+          }
+        ]
+        name "solid(1)"
+        contactMaterial "ExteriorWheelMat"
+        boundingObject USE WHEEL
+        physics DEF WHEEL_PH Physics {
+          density -1
+          mass 1
+        }
+      }
+    }
+    DEF hl HingeJoint {
+      jointParameters HingeJointParameters {
+        position 1.2678917922626948e-09
+        axis -1 0 0
+        anchor -0.04 -0.02 0.04
+      }
+      device [
+        RotationalMotor {
+          name "hl"
+          consumptionFactor -0.001
+          maxVelocity 100
+        }
+      ]
+      endPoint DEF WHEEL1 Solid {
+        translation -0.04 -0.02 0.04
+        rotation -5.863219656691566e-10 5.863240587615583e-10 0.9999999999999999 1.570799999994974
+        children [
+          DEF WHEEL Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.02
+            }
+          }
+        ]
+        contactMaterial "InteriorWheelMat"
+        boundingObject USE WHEEL
+        physics DEF WHEEL_PH Physics {
+          density -1
+          mass 1
+        }
+      }
+    }
+    DEF BODY Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0 1
+      }
+      geometry Box {
+        size 0.05 0.05 0.08
+      }
+    }
+  ]
+  name "car4"
+  model "robot"
+  boundingObject USE BODY
+  physics Physics {
+    density -1
+    mass 5
+  }
+  controller "my_controller_world3"
+  linearVelocity -1.5894793915145396e-08 5.810999555838996e-09 -2.6555176870451034e-06
+  angularVelocity -1.6028423911772922e-07 -3.970270914828349e-07 1.7008621446425406e-10
+}
+Wall {
+  translation -1 -4 0
+  rotation 1 0 0 1.5708
+  size 4 2 0.1
+}
+Wall {
+  translation -4 -1.5 0
+  rotation 1 0 0 1.5708
+  name "wall(1)"
+  size 2 2 0.1
+}
+Wall {
+  translation -3 -4.5 0
+  rotation 0.5773509358554485 0.5773489358556708 0.5773509358554485 2.0944
+  name "wall(2)"
+  size 1 2 0.1
+}
+Wall {
+  translation 3.25 0.5 0
+  rotation 1 0 0 1.5708
+  name "wall(4)"
+  size 1.5 2 0.1
+}
+Wall {
+  translation 3 3.5 0
+  rotation 1 0 0 1.5708
+  name "wall(8)"
+  size 4 2 0.1
+}
+Wall {
+  translation 3.25 2 0
+  rotation 1 0 0 1.5708
+  name "wall(11)"
+  size 1.5 2 0.1
+}
+Wall {
+  translation 4 1.25 0
+  rotation 0.5773509358554485 0.5773489358556708 0.5773509358554485 2.0944
+  name "wall(12)"
+  size 1.5 2 0.1
+}
+Wall {
+  translation -3 -2 0
+  rotation 0.5773509358554485 0.5773489358556708 0.5773509358554485 2.0944
+  name "wall(6)"
+  size 1 2 0.1
+}
+Wall {
+  translation -0.499992 2.03 -1.11441e-05
+  rotation 1.6952594753969508e-09 0.707104781184338 0.7071087811831002 -3.1415853071795863
+  name "wall(13)"
+  size 1 2 0.1
+}
+Wall {
+  translation 1.07 0.99 -1.33174e-06
+  rotation 0.5773509358554485 0.5773489358556708 0.5773509358554485 2.0944
+  name "wall(14)"
+  size 5 2 0.1
+}
+Wall {
+  translation -0.25 -2.5 0
+  rotation 1 0 0 1.5708
+  name "wall(15)"
+  size 5.5 2 0.1
+}
+Wall {
+  translation 2.5 -1.5 0
+  rotation 0.5773509358554485 0.5773489358556708 0.5773509358554485 2.0944
+  name "wall(16)"
+  size 2 2 0.1
+}
+Wall {
+  translation 3.75 -3 0
+  rotation 0.5773509358554485 0.5773489358556708 0.5773509358554485 2.0944
+  name "wall(3)"
+  size 4 2 0.1
+}
+Wall {
+  translation -1 -1.5 0
+  rotation 1 0 0 1.5708
+  name "wall(5)"
+  size 2 2 0.1
+}
+Wall {
+  translation -3.5 3 0
+  rotation 0.5773509358554485 0.5773489358556708 0.5773509358554485 2.0944
+  name "wall(21)"
+  size 1 2 0.1
+}
+Wall {
+  translation -2 -0.5 0
+  rotation 1.6952594753969508e-09 0.707104781184338 0.7071087811831002 -3.1415853071795863
+  name "wall(22)"
+  size 3 2 0.1
+}
+Wall {
+  translation -2 2 0
+  rotation 0.5773509358554485 0.5773489358556708 0.5773509358554485 2.0944
+  name "wall(23)"
+  size 3 2 0.1
+}
+Wall {
+  translation -0.5 1 0
+  rotation 1.6952594753969508e-09 0.707104781184338 0.7071087811831002 -3.1415853071795863
+  name "wall(25)"
+  size 1 2 0.1
+}
+Wall {
+  translation -0.5 3.5 0
+  rotation 0.5773509358554485 0.5773489358556708 0.5773509358554485 2.0944
+  name "wall(26)"
+  size 3 2 0.1
+}
+Wall {
+  translation -3.5 3.5 0
+  rotation 1 0 0 1.5708
+  name "wall(27)"
+  size 3 2 0.1
+}
+Wall {
+  translation -3.5 0.5 0
+  rotation 0.5773509358554485 0.5773489358556708 0.5773509358554485 2.0944
+  name "wall(29)"
+  size 2 2 0.1
+}

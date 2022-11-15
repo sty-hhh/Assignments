@@ -1,0 +1,261 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  contactProperties [
+    ContactProperties {
+      material1 "ExteriorWheelMat"
+      coulombFriction [
+        1.8, 0, 1
+      ]
+      frictionRotation 0.965 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+    ContactProperties {
+      material1 "InteriorWheelMat"
+      coulombFriction [
+        1.8, 0, 1
+      ]
+      frictionRotation -0.965 0
+      bounce 0
+      forceDependentSlip [
+        10, 0
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation 2.3286386025837713e-05 -0.009999833331463703 0.9999500001455509 3.146249767134204
+  position 0.0013649937573632087 -0.17235667408619837 8.834274829883897
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Robot {
+  translation -1.73 3.30588e-07 0.1
+  rotation 0 0 1 1.5708
+  children [
+    GPS {
+      children [
+        Solid {
+          translation 0 3.41606e-06 0.07
+          rotation 1 0 0 1.5708
+          scale 0.5 0.5 0.5
+          children [
+            Shape {
+              appearance PBRAppearance {
+              }
+              geometry Cone {
+                bottomRadius 0.05
+                height 0.1
+              }
+            }
+          ]
+        }
+      ]
+    }
+    Camera {
+      translation 0.17267 0.0600025 0.0138743
+      rotation 0.2505618966828277 0.2505618966828277 -0.9351136144134614 -1.637825307179586
+      scale 0.5 0.5 0.5
+      children [
+        Solid {
+          scale 0.5 0.5 0.5
+        }
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.1 0.1 0.1
+          }
+        }
+      ]
+      name "left_camera"
+    }
+    Camera {
+      translation 0.172668 -0.0699999 0.0138773
+      rotation 0.2505618966828277 0.2505618966828277 -0.9351136144134614 -1.637825307179586
+      scale 0.5 0.5 0.5
+      children [
+        Solid {
+          scale 0.5 0.5 0.5
+        }
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.1 0.1 0.1
+          }
+        }
+      ]
+      name "right_camera"
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0.11 -0.13 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "FR_motor"
+          maxVelocity 100
+        }
+      ]
+      endPoint Solid {
+        translation 0.11 -0.13 -0.05
+        children [
+          Shape {
+            appearance RustyMetal {
+            }
+            geometry Cylinder {
+              height 0.04
+              radius 0.05
+            }
+          }
+        ]
+        contactMaterial "InteriorWheelMat"
+        boundingObject Shape {
+          geometry Cylinder {
+            height 0.04
+            radius 0.05
+          }
+        }
+        physics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0.11 0.13 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "FL_motor"
+          maxVelocity 100
+        }
+      ]
+      endPoint Solid {
+        translation 0.11 0.13 -0.05
+        children [
+          Shape {
+            appearance RustyMetal {
+            }
+            geometry Cylinder {
+              height 0.04
+              radius 0.05
+            }
+          }
+        ]
+        name "solid(1)"
+        contactMaterial "ExteriorWheelMat"
+        boundingObject Shape {
+          geometry Cylinder {
+            height 0.04
+            radius 0.05
+          }
+        }
+        physics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor -0.11 0.13 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "BL_motor"
+          maxVelocity 100
+        }
+      ]
+      endPoint Solid {
+        translation -0.11 0.13 -0.05
+        children [
+          Shape {
+            appearance RustyMetal {
+            }
+            geometry Cylinder {
+              height 0.04
+              radius 0.05
+            }
+          }
+        ]
+        name "solid(2)"
+        contactMaterial "InteriorWheelMat"
+        boundingObject Shape {
+          geometry Cylinder {
+            height 0.04
+            radius 0.05
+          }
+        }
+        physics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor -0.11 -0.13 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "BR_motor"
+          maxVelocity 100
+        }
+      ]
+      endPoint Solid {
+        translation -0.11 -0.13 -0.05
+        children [
+          Shape {
+            appearance RustyMetal {
+            }
+            geometry Cylinder {
+              height 0.04
+              radius 0.05
+            }
+          }
+        ]
+        name "solid(3)"
+        contactMaterial "ExteriorWheelMat"
+        boundingObject Cylinder {
+          height 0.04
+          radius 0.05
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF body Shape {
+      appearance MetalPipePaint {
+      }
+      geometry Box {
+        size 0.3 0.2 0.08
+      }
+    }
+  ]
+  boundingObject Box {
+    size 0.3 0.2 0.08
+  }
+  physics Physics {
+  }
+  controller "main"
+}
+RectangleArena {
+  rotation 1 0 0 1.57
+  floorSize 5 5
+  floorTileSize 5 5
+  floorAppearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "C:/Users/DELL/Desktop/19335174-施天予-V2/car/world/circle.png"
+      ]
+      repeatS FALSE
+      repeatT FALSE
+    }
+    metalness 0
+  }
+}

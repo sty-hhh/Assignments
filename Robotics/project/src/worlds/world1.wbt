@@ -1,0 +1,301 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  basicTimeStep 50
+}
+Viewpoint {
+  orientation -0.45303076052101443 0.0016715519327873826 -0.8914933179423653 0.00827754605068169
+  position 0.003396429068824039 0.04382306185599954 11.779379328100175
+  follow "rectangle arena"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  rotation 1 0 0 1.57
+  floorSize 5 5
+  wallHeight 0.5
+}
+Wall {
+  translation 0.75 1 0
+  rotation 1.6952594753969508e-09 0.707104781184338 0.7071087811831002 -3.1415853071795863
+  name "wall1"
+  size 3.5 0.5 0.1
+}
+Wall {
+  translation -0.75 -1 0
+  rotation 1 0 0 1.5708
+  name "wall2"
+  size 3.5 0.5 0.1
+}
+DEF car4 Robot {
+  translation 2 2 0.0402791
+  rotation 0.577230749833365 0.5774646611519805 0.5773553728575144 2.09406452075014
+  children [
+    InertialUnit {
+      rotation -0.5772162380336358 0.5772162380336358 0.5776182381994135 2.09399
+    }
+    Lidar {
+      translation 0 0.14 0
+      rotation 0 1 0 1.5701
+      horizontalResolution 1024
+      fieldOfView 6.28
+      verticalFieldOfView 0.05
+      numberOfLayers 1
+      near 0.001
+      minRange 0.05
+      maxRange 2
+    }
+    Display {
+      width 50
+      height 50
+    }
+    GPS {
+    }
+    DEF fld HingeJoint {
+      jointParameters HingeJointParameters {
+        position -2.1590935210610074e-09
+        axis 0 1 0
+        anchor -0.04 0 -0.04
+      }
+      device [
+        RotationalMotor {
+          name "fld"
+        }
+      ]
+      endPoint Solid {
+        translation -8.636374254633594e-11 0 8.636374254633594e-11
+        children [
+          DEF fle Transform {
+            translation -0.04 0 -0.04
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  transparency 0.5
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.01
+                }
+              }
+            ]
+          }
+          DEF fl HingeJoint {
+            jointParameters HingeJointParameters {
+              position -9.156529730592363e-09
+              axis -1 0 0
+              anchor -0.04 -0.02 -0.04
+            }
+            device [
+              RotationalMotor {
+                name "fl"
+                consumptionFactor -0.001
+                maxVelocity 100
+              }
+            ]
+            endPoint DEF WHEEL1 Solid {
+              translation -0.04 -0.02 -0.04
+              rotation -0.6740628888272381 0.673593684117249 0.3031678918078732 2.5524847182236226
+              children [
+                DEF WHEEL Shape {
+                  appearance PBRAppearance {
+                    baseColor 1 1 0
+                  }
+                  geometry Cylinder {
+                    height 0.02
+                    radius 0.02
+                  }
+                }
+              ]
+              name "solid(3)"
+              contactMaterial "ExteriorWheelMat"
+              boundingObject USE WHEEL
+              physics DEF WHEEL_PH Physics {
+                density -1
+                mass 1
+              }
+            }
+          }
+        ]
+        name "solid(3)"
+        boundingObject USE fle
+        physics Physics {
+        }
+      }
+    }
+    DEF frd HingeJoint {
+      jointParameters HingeJointParameters {
+        position -2.2487418741622422e-09
+        axis 0 1 0
+        anchor 0.04 0 -0.04
+      }
+      device [
+        RotationalMotor {
+          name "frd"
+        }
+      ]
+      endPoint Solid {
+        translation -8.994967271025445e-11 0 -8.994967271025445e-11
+        children [
+          DEF fre Transform {
+            translation 0.04 0 -0.04
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  transparency 0.5
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.01
+                }
+              }
+            ]
+          }
+          DEF fr HingeJoint {
+            jointParameters HingeJointParameters {
+              position -3.922970994970145e-09
+              axis -1 0 0
+              anchor 0.04 -0.02 -0.04
+            }
+            device [
+              RotationalMotor {
+                name "fr"
+                consumptionFactor -0.001
+                maxVelocity 100
+              }
+            ]
+            endPoint DEF WHEEL1 Solid {
+              translation 0.04 -0.02 -0.04
+              rotation 0.6788109714255846 -0.6783384616490282 0.2811985002091652 2.592990178704072
+              children [
+                DEF WHEEL Shape {
+                  appearance PBRAppearance {
+                    baseColor 1 1 0
+                  }
+                  geometry Cylinder {
+                    height 0.02
+                    radius 0.02
+                  }
+                }
+              ]
+              name "solid(2)"
+              contactMaterial "InteriorWheelMat"
+              boundingObject USE WHEEL
+              physics DEF WHEEL_PH Physics {
+                density -1
+                mass 1
+              }
+            }
+          }
+        ]
+        name "solid(4)"
+        boundingObject DEF fre Transform {
+          translation 0.04 0 -0.04
+          children [
+            Shape {
+              appearance PBRAppearance {
+                transparency 0.5
+              }
+              geometry Cylinder {
+                height 0.01
+                radius 0.01
+              }
+            }
+          ]
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF hr HingeJoint {
+      jointParameters HingeJointParameters {
+        position -8.385752633672908e-09
+        axis -1 0 0
+        anchor 0.04 -0.02 0.04
+      }
+      device [
+        RotationalMotor {
+          name "hr"
+          consumptionFactor -0.001
+          maxVelocity 100
+        }
+      ]
+      endPoint DEF WHEEL1 Solid {
+        translation 0.04 -0.02 0.04
+        rotation 4.1205784663105175e-09 -4.120593475033595e-09 0.9999999999999999 1.570799999995009
+        children [
+          DEF WHEEL Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.02
+            }
+          }
+        ]
+        name "solid(1)"
+        contactMaterial "ExteriorWheelMat"
+        boundingObject USE WHEEL
+        physics DEF WHEEL_PH Physics {
+          density -1
+          mass 1
+        }
+      }
+    }
+    DEF hl HingeJoint {
+      jointParameters HingeJointParameters {
+        position -1.5068047070186336e-09
+        axis -1 0 0
+        anchor -0.04 -0.02 0.04
+      }
+      device [
+        RotationalMotor {
+          name "hl"
+          consumptionFactor -0.001
+          maxVelocity 100
+        }
+      ]
+      endPoint DEF WHEEL1 Solid {
+        translation -0.04 -0.02 0.04
+        rotation 8.010211879731692e-10 -8.010241908791058e-10 0.9999999999999999 1.570799999994974
+        children [
+          DEF WHEEL Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.02
+            }
+          }
+        ]
+        contactMaterial "InteriorWheelMat"
+        boundingObject USE WHEEL
+        physics DEF WHEEL_PH Physics {
+          density -1
+          mass 1
+        }
+      }
+    }
+    DEF BODY Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0 1
+      }
+      geometry Box {
+        size 0.05 0.05 0.08
+      }
+    }
+  ]
+  name "car4"
+  model "robot"
+  boundingObject Cylinder {
+    height 0.05
+    radius 0.08
+  }
+  physics Physics {
+    density -1
+    mass 5
+  }
+  controller "my_controller_world1"
+}
