@@ -1,6 +1,8 @@
 build/release/main.o: main.cpp \
- E:\Programs\Webots/include/controller/cpp/webots/Robot.hpp \
- E:\Programs\Webots/include/controller/cpp/webots/Motor.hpp \
- E:\Programs\Webots/include/controller/cpp/webots/Device.hpp \
- E:/Programs/Webots/include/controller/c/webots/types.h \
- E:\Programs\Webots/include/controller/cpp/webots/Keyboard.hpp
+ E:\Webots/include/controller/cpp/webots/Robot.hpp \
+ E:\Webots/include/controller/cpp/webots/Motor.hpp \
+ E:\Webots/include/controller/cpp/webots/Device.hpp \
+ E:/Webots/include/controller/c/webots/types.h \
+ E:\Webots/include/controller/cpp/webots/Camera.hpp \
+ E:/Webots/include/controller/c/webots/camera_recognition_object.h \
+ E:\Webots/include/controller/cpp/webots/Gps.hpp

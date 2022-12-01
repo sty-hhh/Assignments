@@ -1,169 +1,99 @@
-
 #include <webots/Robot.hpp>
 #include <webots/Motor.hpp>
-#include <webots/Keyboard.hpp>
+#include <webots/Camera.hpp>
+#include <webots/Gps.hpp>
 #include <iostream> 
-
 #include <algorithm>
-#include <iostream>
 #include <limits>
 #include <string>
+#include <sys/time.h>
 
 using namespace std;
 using namespace webots;
 
+// #define TIME_STEP 64
 
+#define SPEED1 30
+#define SPEED2 8
+#define GRAY 120
 
 int main() {
-	Motor *motors[4];//µç»úºÍ¼üÅÌ¶¼ÒªÓÃwebots¸øµÄÀàĞÍ
-	webots::Keyboard keyboard;
-	char wheels_names[4][8] = { "motor1","motor2","motor3","motor4" };//ÄãÔÚ·ÂÕæÆ÷ÀïÃæÉèÖÃµÄÃû×Ö
-
-	Robot *robot = new Robot();//Ê¹ÓÃwebotsµÄ»úÆ÷ÈËÖ÷Ìå
-	keyboard.enable(1);//ÔËĞĞ¼üÅÌÊäÈëÉèÖÃÆµÂÊÊÇ1ms¶ÁÈ¡Ò»´Î
-
-	double speed1[4];
-	double speed2[4];
-	double velocity = 10;
-
-	//³õÊ¼»¯
-	for (int i = 0; i < 4; i++)
-	{
-		motors[i] = robot->getMotor(wheels_names[i]);//°´ÕÕÄãÔÚ·ÂÕæÆ÷ÀïÃæÉèÖÃµÄÃû×Ö»ñÈ¡¾ä±ú
+	// åˆå§‹åŒ–
+    Robot *robot = new Robot();
+	int timeStep = (int)robot->getBasicTimeStep();
+	Camera *camera[2];
+	char camera_names[2][15] = {"left_camera", "right_camera"};
+    Motor *motors[4];
+	char wheels_names[4][10] = {"FR_motor", "FL_motor", "BL_motor", "BR_motor"};
+    GPS *gps = robot->getGPS("gps");
+    gps->enable(timeStep);
+	
+	for (int i = 0; i < 2; i++) {
+    	camera[i] = robot->getCamera(camera_names[i]);
+		camera[i]->enable(timeStep);
+  	}
+	for (int i = 0; i < 4; i++) {
+    	motors[i] = robot->getMotor(wheels_names[i]);
 		motors[i]->setPosition(std::numeric_limits<double>::infinity());
 		motors[i]->setVelocity(0.0);
-
-		speed1[i] = 0;
-		speed2[i] = 0;
 	}
+	double left_speed = SPEED1;
+    double right_speed = SPEED1;
 
+    long step = 0;
+	double average_speed = 0;
+	double average_position = 0;
+	const double *position = nullptr;
 
+	// æ ¹æ®å·¦å³ç›¸æœºçš„ç°åº¦å€¼æ§åˆ¶è½®å­çš„é€Ÿåº¦
+	while (robot->step(timeStep) != -1) {
+		step++;
+        position = gps->getValues();
+		// è®¡ç®—å°è½¦è·ç¦»åœ†å¿ƒçš„è·ç¦»
+        average_position += sqrt(position[0] * position[0] + position[1] * position[1]);
 
-
-	//ÎÒÁĞÁËÒ»¸öĞ¡±í¸ñ£¬µ±ËÄ¸öÂÖ×Ó°´ÕÕÏÂÃæÕâÑù×ªµÄÊ±ºò£¬³µ×Ó¿ÉÒÔÍê³ÉÇ°ºó×óÓÒ£¬×ªÈ¦
-	//Ğ±×Å×ßÊÇÇ°ºó+×óÓÒ  Á½¸ö¼üÍ¬Ê±°´
-	double speed_forward[4] = { velocity ,velocity ,velocity ,velocity };
-	double speed_backward[4] = { -velocity ,-velocity ,-velocity ,-velocity };
-	double speed_leftward[4] = { velocity ,-velocity ,velocity ,-velocity };
-	double speed_rightward[4] = { -velocity ,velocity ,-velocity ,velocity };
-
-	double speed_leftCircle[4] = { velocity ,-velocity ,-velocity ,velocity };
-	double speed_rightCircle[4] = { -velocity ,velocity ,velocity ,-velocity };
-
-
-	int timeStep = (int)robot->getBasicTimeStep();//»ñÈ¡ÄãÔÚwebotsÉèÖÃÒ»Ö¡µÄÊ±¼ä
-	cout << timeStep << endl;
-
-	while (robot->step(timeStep) != -1) //·ÂÕæÔËĞĞÒ»Ö¡
-	{
-
-
-
-		//»ñÈ¡¼üÅÌÊäÈë£¬ÕâÑùĞ´¿ÉÒÔ»ñµÃÍ¬Ê±°´ÏÂµÄ°´¼ü£¨×î¶àÖ§³Ö7¸ö£©
-		int keyValue1 = keyboard.getKey();
-		int keyValue2 = keyboard.getKey();
-		cout << keyValue1 << ":" << keyValue2 << endl;
-
-		//¸ù¾İ°´¼ü¾ö¶¨µç»úÔõÃ´Ñù×ª¶¯
-		if (keyValue1 == 'W')
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				speed1[i] = speed_forward[i];
+    	const unsigned char* left_image = camera[0]->getImage();
+		const unsigned char* right_image = camera[1]->getImage();
+		int height = camera[0]->getHeight();
+		int width = camera[0]->getWidth();
+		double count_lb = 0, count_rb = 0;
+		for (int i = 0; i < width; ++i) {
+			for (int j = 0; j < height; ++j) {
+				// è·å–å·¦å³ç›¸æœºæ¯ä¸ªåƒç´ ç‚¹çš„ç°åº¦å€¼
+				int l_g = camera[0]->imageGetGray(left_image, width, i, j);
+				int r_g = camera[1]->imageGetGray(right_image, width, i, j);
+				count_lb += l_g;
+				count_rb += r_g;
 			}
 		}
-		else if (keyValue1 == 'S')
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				speed1[i] = speed_backward[i];
-			}
-		}
-		else if (keyValue1 == 'A')
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				speed1[i] = speed_leftward[i];
-			}
-		}
-		else if (keyValue1 == 'D')
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				speed1[i] = speed_rightward[i];
-			}
-		}
-		else if (keyValue1 == 'Q')
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				speed1[i] = speed_leftCircle[i];
-			}
-		}
-		else if (keyValue1 == 'E')
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				speed1[i] = speed_rightCircle[i];
-			}
-		}
-		else
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				speed1[i] = 0;
-			}
-		}
+		// åŠ èµ·æ¥åè¦å–å¹³å‡
+		count_lb /= width * height;	
+		count_rb /= width * height;
+ 		
+    	if ((count_lb <= GRAY && count_rb <= GRAY) || (count_lb > GRAY && count_rb > GRAY)) {	// å·¦å³éƒ½ä½(é«˜)å¾€å‰èµ°
+      		left_speed = SPEED1;
+      		right_speed = SPEED1;
+    	}
+    	else if (count_lb <= GRAY && count_rb > GRAY) {	// å·¦ä½å³é«˜å¾€å·¦å
+      		left_speed = SPEED2;
+      		right_speed = SPEED1;
+    	}
+    	else if (count_lb > GRAY && count_rb <= GRAY) {	// å·¦é«˜å³ä½å¾€å³å
+			left_speed = SPEED1;
+      		right_speed = SPEED2;
+    	}
+        // è®¡ç®—å¹³å‡é€Ÿåº¦
+        average_speed = (average_speed * (step-1) + (left_speed + right_speed)/2) / step;
+		// è¾“å‡ºè·ç¦»åœ†å¿ƒè·ç¦»ã€å¹³å‡é€Ÿåº¦ã€å·¦å³ç›¸æœºçš„ç°åº¦å€¼
+		printf("position: %lf, ", average_position / step);
+        printf("speed: %lf,", average_speed);
+		printf("left: %lf, right: %lf\n", count_lb, count_rb);
 
-
-
-
-		if (keyValue2 == 'W')
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				speed2[i] = speed_forward[i];
-			}
-		}
-		else if (keyValue2 == 'S')
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				speed2[i] = speed_backward[i];
-			}
-		}
-		else if (keyValue2 == 'A')
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				speed2[i] = speed_leftward[i];
-			}
-		}
-		else if (keyValue2 == 'D')
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				speed2[i] = speed_rightward[i];
-			}
-		}
-		else
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				speed2[i] = 0;
-			}
-		}
-
-
-		//ÈÃµç»úÖ´ĞĞ
-		for (int i = 0; i < 4; i++)
-		{
-			motors[i]->setVelocity(speed1[i] + speed2[i]);
-		}
-
-		//wb_motor_set_velocity(wheels[0],right_speed);
-	}
-
-
+		motors[0]->setVelocity(right_speed);
+     	motors[1]->setVelocity(left_speed);
+     	motors[2]->setVelocity(left_speed);
+     	motors[3]->setVelocity(right_speed);
+  	}
+    delete robot;
 	return 0;
 }

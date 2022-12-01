@@ -1,6 +1,5 @@
 # README
 
-提交的项目文件因为图片路径不同，所以可能需要重新加载地图。
+prm文件夹：包含prm算法的python文件，用于生成规划路径图
 
-circle.png在world文件夹中
-
+webots文件夹：webots项目（生成的规划路径图已插入）
