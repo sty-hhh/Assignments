@@ -1,4 +1,4 @@
-# Parallel and Distributed Computing
+# Distributed Systems
 
 This is the repository of sty-hhh's assignments of *Distributed Systems* - Fall 2022 @ SYSU lectured by *Pengfei Chen*.
 
